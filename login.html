@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="google-signin-client_id" content="387255546883-5h279s0acmok93qm7soip4hpon9es7h7.apps.googleusercontent.com">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <style>
+    html, body{
+      height: 100%;
+    }
+
+    body {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+      
+    }
+
+   /* .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+*/
+    #usuario {
+      width: 300px;
+      text-align: center;
+      margin-left: 55px;
+    }
+    #clave {
+      width: 300px;
+      text-align: center;
+      margin-left: 55px;
+    }
+    
+    #ingresar {
+
+      width: 300px;
+      text-align: center;
+      margin-left: 55px;
+    }
+    
+    .g-signin2{
+      margin-left: 55px;
+      margin-top: 10px;
+    }
+
+    .container { 
+      width: 500px;
+    }
+  
+    .checkbox {
+      margin: 20px ;
+    }
+  
+  </style>
+  
+</head>
+
+<body class="text-center">
+
+  <div class="container p-5">    
+    <form name="formulario" class="form-signin">
+      <img class="mb-4" src="img/login.png" alt="Img login" height="167" onclick="location.href='login.html'"  >
+      <h1 class="h3 mb-3 font-weight-normal">Por favor, inicie sesión</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input name="name" type="email" id="usuario" class="form-control" placeholder="Email" required autofocus="" >
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="clave" class="form-control" placeholder="Contraseña">
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Recuerdame
+        </label>
+      </div>
+      <!-- <button id="ingresar" onclick="location.href='index.html'" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+        <button id="ingresar" onclick="checkForm()" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-width="300" data-height="40" data-scope="https://www.googleapis.com/auth/plus.login" data-accesstype="offline" data-redirecturi="https://bruno-cantoni.github.io/Proyecto-JaP/index.html"></div>
+      <p class="mt-5 mb-3 text-muted">©️ Jovenes a Programar 2020</p>
+    </form>
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
