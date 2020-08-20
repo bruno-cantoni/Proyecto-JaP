@@ -48,15 +48,15 @@ document.addEventListener("DOMContentLoaded", function(e){
 });
 
 var loginUser = sessionStorage.getItem('usuario');
-var logout = document.getElementById("logout");
+//var logout = document.getElementById("logout");
 
 document.getElementById("btnUsuario").innerHTML = loginUser;
 
 
-function limpiarSession(){
+//function limpiarSession(){
 
-  sessionStorage.clear();
+  //sessionStorage.clear();
 
-}
+//}
 
-logout.addEventListener("click", limpiarSession);
+//logout.addEventListener("click", limpiarSession);
