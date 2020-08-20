@@ -56,6 +56,6 @@ function onSignIn(googleUser) {
   //window.open('index.html');
   var UsuarioGoogle = profile.getName();
 
-  sessionStorage.setItem("usuario", UsuarioGoogle);
+  sessionStorage.setItem("usuario", JSON.stringify(UsuarioGoogle));
 }
 
