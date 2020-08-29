@@ -47,6 +47,7 @@ var getJSONData = function(url){
 document.addEventListener("DOMContentLoaded", function(e){
 });
 
+
 var loginUser = sessionStorage.getItem('usuario');
 //var logout = document.getElementById("logout");
 

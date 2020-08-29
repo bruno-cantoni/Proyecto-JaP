@@ -5,6 +5,7 @@ var currentProductsArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+var textoBuscar = undefined;
 
 function sortProducts(criteria, array){
     let result = [];
@@ -42,7 +43,8 @@ function showProductsList(){
         let product = currentProductsArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount)) &&
+             ((textoBuscar == undefined) || (textoBuscar != undefined && product.name.toLowerCase().includes(textoBuscar.toLowerCase())))){
 
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -79,6 +81,7 @@ function sortAndShowProducts(sortCriteria, categoriesArray){
     //Muestro las categorías ordenadas
     showProductsList();
 }
+
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
@@ -134,4 +137,17 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showProductsList();
     });
+
+    document.getElementById("Buscar").addEventListener("keyup", function () {
+
+        textoBuscar = document.getElementById("Buscar").value ;
+
+        
+        showProductsList();
+
+    });
+
+
+
+
 });
