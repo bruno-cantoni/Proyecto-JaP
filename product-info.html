@@ -17,18 +17,17 @@
 
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-
-      
+    <div class="container d-flex flex-column flex-md-row justify-content-lg-around">  
       <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>    
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle Usuario" href="#" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" id="btnUsuario"></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="login.html">Cerrar sesión</a>
         </div>
     </div>
@@ -59,14 +58,28 @@
         <p id="productCategory"></p>
       </dd>
       <dt>Imágenes ilustrativas</dt>
-      <dd>
-        <div class="row text-center text-lg-left pt-2" id="productInfoGallery">
-        </div>
+      <dd>        
+      <div id="carouselIndicators" class="carousel slide col-6 " data-ride="carousel">
+          <div class="carousel-inner" id=productCarousel>
+            
+          </div>
+         <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <!-- </dd> -->
       </dd>
+      <br><br>
       <dt>Productos Relacionados</dt>
       <dd>
         <div class="row text-center text-lg-left pt-2" id="productRelatedImages">
         </div>
+        <br><br>
       </dd>      
       <dt>Comentarios de nuestros clientes</dt>
       <dd>
