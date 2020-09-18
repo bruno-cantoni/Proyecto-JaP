@@ -1,23 +1,28 @@
 var product = {};
-
+// se edita la funcion showImagesGallery para implementar el carousel.
 function showImagesGallery(array) {
 
     let htmlContentToAppend = "";
-
-    for (let i = 0; i < array.length; i++) {
-        let imageSrc = array[i];
+    var active;
+   for (let i = 0; i < array.length; i++) {
+       let imageSrc = array[i];
+        // Si la posición es la inicial se carga la palabra "active" y se muestra para la primera iteración. El resto queda como vacio
+       if (i == 0) active = "active";
+        else active= "";
 
         htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
-            </div>
-        </div>
+        <div class="carousel-item ` + active +`">
+                <img class="d-block w-100" src="` + imageSrc + `" alt="">
+            </div>                  
         `
-
-        document.getElementById("productInfoGallery").innerHTML = htmlContentToAppend;
+        
+        document.getElementById("productCarousel").innerHTML = htmlContentToAppend;
+        
     }
+    
 }
+
+
 
 function showComentaries(array) {
    
@@ -171,11 +176,15 @@ document.addEventListener("DOMContentLoaded", function (e){
                         ArrProdRel.forEach(function (arrayItem){ 
                                //Tomo como ejemplo la función que muestra imagenes "showImagesGallery"
                                 htmlContentToAppend += `
-                                <div class="col-lg-3 col-md-4 col-6">
-                                    <div class="d-block mb-4 h-100">
-                                        <img class="img-fluid img-thumbnail" src="` + product[arrayItem].imgSrc + `" alt="">
-                                    </div>
-                                </div>
+                                
+                                <div class="col-lg-3 col-md-4 col-6">                                
+                                    <div class="d-block mb-4 h-100">                                
+                                        <img class="img-fluid img-thumbnail"  src="` + product[arrayItem].imgSrc + `" alt="">
+                                           <br><br><p class="mb-1">` + product[arrayItem].description + `</p>
+                                        </div>
+                                   </div>
+                                
+                               
                                 `
                         
                                 document.getElementById("productRelatedImages").innerHTML = htmlContentToAppend;
@@ -285,9 +294,6 @@ globalComent += "*" + comentario;
 
 
 }); 
-
-
-
 
 
 
