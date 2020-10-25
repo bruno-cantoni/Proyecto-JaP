@@ -38,10 +38,10 @@ function checkForm(){
                                           alert("Por favor, ingrese un email válido");
                                    
                                 }       else if (usuario !== "" && clave !== "" &&  RegEx.test(usuario) ){
-                                              alert("Bienvenido: "+ usuario);                                                                                 
-                                              sessionStorage.setItem('usuario', usuario);
-
-                                              window.open('index.html');        
+                                             
+                                             alert("Bienvenido: "+ usuario);
+                                             sessionStorage.setItem('usuario', usuario);
+                                             window.open('index.html');        
                                 }
 }
  
