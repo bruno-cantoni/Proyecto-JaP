@@ -9,6 +9,7 @@
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
 
+  <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
@@ -33,7 +34,7 @@
   <link href="css/dropzone.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="cartBody">
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-lg-around">
       <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
@@ -44,12 +45,13 @@
           <a class="nav-link dropdown-toggle Usuario" href="#" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" id="btnUsuario"></a>
          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+          <a class="dropdown-item" href="cart.html">Ver mi carrito <span class ="badge badge-pill badge-info" id="cartProducts"></span></a> 
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="login.html">Cerrar sesión</a>
          </div>
     </div>
   </nav>
+  
   <div class="container">
         <div class="text-center p-4">
           <h2>Carrito de Compras</h2>
@@ -97,32 +99,32 @@
                <br>
                <h4 class="mb-3">Dirección de envío</h4>
                <hr class="mb-4">
-               <form class="needs-validation" id="dirección">
+               <form class="was-validated" id="dirección">
                 <div class="row">
                   <div class="col-md-6 mb-3">
 
-                    <label for="productName">Calle</label> 
-                    <input type="text" class="form-control" id="street" placeholder="" value="" >
+                    <label for="street">Calle</label> 
+                    <input type="text" class="form-control" id="street" placeholder="" value="" required>
                     <div class="invalid-feedback">
-                      Ingresa una calle                      
+                      Por favor, ingrese una calle.                                          
                     </div>                    
                   </div>                 
                   <div class="row">
                     <div class="col-md-6 mb-3">
-                      <label for="productName">Número</label>
-                      <input type="text" class="form-control" id="streetNumber" placeholder="" value="" >
+                      <label for="streetNumber">Número</label>
+                      <input type="text" class="form-control" id="streetNumber" placeholder="" value="" required>
                       <div class="invalid-feedback">
-                        Ingresa un número
+                        Por favor, ingrese un número.
                       </div>
                     </div>
                  </div> 
                 </div>       
                   <div class="row">
                     <div class="col-md-6 mb-3">
-                      <label for="productName">Esquina</label>
-                      <input type="text" class="form-control" id="streetcorner" placeholder="" value="" >
+                      <label for="streetcorner">Esquina</label>
+                      <input type="text" class="form-control" id="streetcorner" placeholder="" value="" required>
                       <div class="invalid-feedback">
-                        Ingresa una esquina
+                        Por favor, ingrese una esquina.
                       </div>
                     </div>
                   </div>
@@ -156,14 +158,166 @@
                   </li>
                 </ul>
                 <hr class="mb-4">
-                <h5 class="mb-3">Forma de pago</h5>                
+                <h5 class="mb-3">Forma de pago</h5> 
+                <p id="metodoSeleccionado"></p>  
+                <br>          
                 <h6 class="my-0" id="seleccionaPago"></h6>                
                 <div class="row">
-                  <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Seleccionar</button>
+                  <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#paymentModal" id="mPago">Seleccionar</button>
                 </div>
-                <br>
                 <button class="btn btn-primary btn-lg" id="btnFinalizar" type="submit">Finalizar</button>
-      </div>
+                <!-- Aqui estan las alertas que muestro para completar campos y para cuando se realiza la transacción -->
+                <div class="alert alert-danger alert-dismissible fade show" id="dangerAlert" style="display: none;" >
+                  <span>
+                    <p>Por favor, completa los campos requeridos y controla haber seleccionado una forma de pago para finalizar.</p>
+                  </span>
+                 <button type="button" class="close" aria-label="Close" >
+                   <span aria-hidden="true" id="closex">&times;</span> 
+                </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" id="okAlert" style="display: none;" >
+                  <span>
+                    <p id="ventaOk"></p>
+                  </span>
+                 <button type="button" class="close" aria-label="Close" >
+                   <span aria-hidden="true" id="closexOk">&times;</span> 
+                </button>
+                </div>
+                <br><br>
+                <!--ACA PONEMOS EL MEDIO DE PAGO QUE LLAMAREMOS AL PRESIONAR "Seleccionar"-->
+               <div class="modal" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="container py-5" >
+                  <!-- For demo purpose -->
+                  <div class="row mb-4">
+                      
+                  </div> <!-- End -->
+                  <div class="row">
+                      <div class="col-lg-6 mx-auto">
+                          <div class="card ">
+                              <div class="card-header">
+                                <button type="button" class="close" aria-label="Close" data-dismiss="modal" id="closePayment">
+                                  <span aria-hidden="true">&times;</span> 
+                               </button>                                
+                                  <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                                      <!-- Credit card form tabs -->
+                                      <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                                          <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Tarjeta de credito </a> </li>
+                                          <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fas fa-receipt mr-2"></i> Red de Cobranzas </a> </li>
+                                          <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-university"></i> Transferencia Bancaria </a> </li>
+                                      </ul>
+                                  </div> <!-- End -->
+                                  <!-- Credit card form content -->
+                                  <div class="tab-content">
+                                      <!-- credit card info-->
+                                      <div id="credit-card" class="tab-pane fade show active pt-3">
+                                          <form class="was-validated" role="form">
+                                              <div class="form-group"> <label for="username">
+                                                      <h6>Titular de la tarjeta</h6>
+                                                      <!-- Agrego una restriccion a través de reggex (regular expression) para que solo se pueda ingresar letras sin numeros y al menos 10 con espacios -->
+                                                  </label> <input type="text" name="username" placeholder="Nombre del titular de la tarjeta" required class="form-control" id="titularTarjeta" pattern="[A-Za-z\s]{10,}"  required > </div>
+                                              <div class="form-group"> <label for="cardNumber">
+                                                      <h6>Numero de tarjeta</h6>
+                                                  </label>
+                                                  <div class="input-group"> <input type="text" name="cardNumber" placeholder="Número de tarjeta de credito (16 digitos)" class="form-control " id="numeroTarjeta" minlength='16' maxlength='16' required  >  
+                                                      <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-sm-8">
+                                                      <div class="form-group"> <label><span class="hidden-xs">
+                                                                  <h6>Fecha de expiración</h6>
+                                                              </span></label>
+                                                          <div class="input-group"> 
+                                                            <input type="number" placeholder="MM" name="" class="form-control" min="01" max="12" value="00" id="mesTarjeta" required> 
+                                                            <input type="number" placeholder="YY" name="" class="form-control" min ="20" value="20" id="añoTarjeta" required> </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-sm-4">
+                                                      <div class="form-group mb-4"> <label data-toggle="tooltip" title="Los 3 digitos que aparecen en la parte trasera de tu tarjeta">
+                                                              <h6 >CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                                          </label> <input type="number" required class="form-control" id="cvvTarjeta" max="999"> </div>
+                                                  </div>
+                                              </div>
+                                              <div class="card-footer">
+                                                <button type="button" class="btn btn-secondary  btn-block shadow-sm" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="subscribe btn btn-primary btn-block shadow-sm" id="okTarjetaCredito">Confirmar</button>
+                                          </form>
+                                      </div>
+                                  </div> <!-- End -->
+                                  <!-- Paypal info -->
+                                  <div id="paypal" class="tab-pane fade pt-3">
+                                      <h6 class="pb-2">Selecciona tu Red de Cobranza favorito</h6>
+                                      <div class="form-group "> 
+                                        <label class="radio-inline"> <input type="radio" name="optradio" checked id="radioAbitab"> Abitab <img src="img/Abitab.jpg" height=60px width=60px class="rounded"></label> 
+                                        <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5" id="radioRedPagos"> Red Pagos <img src="img/Redpagos.jpg" height=60px width=60px class="rounded"></label></div>
+                                      <!-- <p> <button type="button" id="mostrarRedCobranza" class="btn btn-primary "><i class="fas fa-receipt mr-2"></i> Mostrar datos y continuar </button> </p> -->
+                                      <p> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRedCobranzas" id="RedCobranzasGo"> <i class="fas fa-receipt mr-2"></i> Mostrar datos y continuar</button></p>
+                                      <p class="text-muted">Recuerda enviarnos el comprobante de la transferencia a nuestra casilla de correo Ventas.e-Commerce@JaP.com </p>
+                                  </div> <!-- End -->
+                                  <!-- bank transfer info -->
+                                  <div id="net-banking" class="tab-pane fade pt-3">
+                                      <div class="form-group "> <label for="Select Your Bank">
+                                              <h6>Selecciona tu Banco</h6>
+                                          </label> <select class="form-control" id="ccmonth">
+                                              <!-- <option value="" selected disabled>--Selecciona el Banco--</option> -->
+                                              <option value ="http://santander.com.uy">Santander</option>
+                                              <option value="https://scotiabank.com.uy">Scotiabank</option>
+                                              <option value="http://brou.com.uy">BROU</option>
+                                              <option value="https://www.itau.com.uy/inst/">ITAU</option>
+                                              <option value="http://hsbc.com.uy">HSBC</option>
+                                              <option value="http://bbva.com.uy">BBVA</option>
+                                          </select> </div>
+                                      <div class="form-group">
+                                          <p> <button type="button" id="bankgo"class="btn btn-primary ">Proceder con el pago</button> </p>
+                                      </div>
+                                      <p class="text-muted">Nota: Luego de presionar el botón, vas a ser redirigido a una pagina segura para efectivizar el pago. </p>
+                                  </div> <!-- End -->
+                                  <!-- End -->
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                <div class"row">
+                  <div class="alert alert-danger alert-dismissible fade show  col-md-3 col-md-offset-3" id="dangerAlert2" style="display: none;" >
+                    <span>
+                      <p>Por favor, completa los campos requeridos.</p>
+                    </span>
+                   <button type="button" class="close" aria-label="Close" >
+                     <span aria-hidden="true" id="closex">&times;</span> 
+                  </button>
+                  </div>
+                </div>
+
+                </div>
+
+                
+
+                      <!--MODAL PARA MOSTRAR DATOS TANTO DE RED PAGOS O ABITAB-->
+                      <div class="modal" tabindex="-1" role="dialog" id="modalRedCobranzas">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Datos para la transferencia</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p><strong>Nombre:</strong> Luis Perez.</p>
+                              <p><strong>Ci:</strong> 4.587.988-3</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" id="okRedCobranzas">Ok! tengo los datos para la transferencia</button>                        
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+            </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
