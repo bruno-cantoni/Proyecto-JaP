@@ -27,6 +27,31 @@
         font-size: 3.5rem;
       }
     }
+
+    /* Con esto no ocultamos las flechas en el campo number */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  input[type=number] {
+      -moz-appearance:textfield; /* Firefox */
+  }
+
+  img {
+
+    width:200px; 
+    height: auto;
+    border-radius: 50px;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+  }
+
+  
+
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -34,7 +59,8 @@
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
+  <!-- <nav class="site-header sticky-top py-1 bg-dark"> -->
+    <nav class="site-header navbar-expand-lg sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-lg-around">
       <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
@@ -50,26 +76,126 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container">
+   <!--  <div class="offset-md-10" id="imagenSubir">
+     
+  </div> -->
+    <div class="text-center p-4">
+      <h2>Mi perfil</h2>
+     <p class="lead">Verás aquí toda la información de tu cuenta.</p>
     </div>
+    <div class="offset-md-10" id="imagenSubir">
+         </div>
+  <hr class="mb-4">
+  
+  
+  <form class="was-validated" id="perfil">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="street">Primer Nombre<sup>*</sup></label> 
+        <input type="text" class="form-control" id="primerNombre" placeholder="" value="" required>
+       <div class="invalid-feedback">
+          Por favor, ingrese su primer nombre.                                          
+        </div>                    
+      </div>                 
+      <!-- <div class="row"> -->
+        <div class="col-md-4 mb-3">
+          <label for="streetNumber">Segundo Nombre</label>
+          <input type="text" class="form-control" id="segundoNombre" placeholder="" value="" >          
+        </div>
+     <!-- </div>  -->
+    </div>       
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="streetcorner">Primer Apellido<sup>*</sup></label>
+          <input type="text" class="form-control" id="primerApellido" placeholder="" value="" required>
+          <div class="invalid-feedback">
+            Por favor, ingrese su primer apellido.
+          </div>
+        </div>
+        <!-- <div class="row"> -->
+          <div class="col-md-4 mb-3">
+            <label for="streetNumber">Segundo Apellido</label>
+            <input type="text" class="form-control" id="segundoApellido" placeholder="" value="" >          
+          </div>
+      </div>
+       <!-- </div>  -->
+       <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="streetcorner">E-mail</label>
+          <input type="text" class="form-control" id="emailPerfil" placeholder="" value="" readonly >
+         <div class="invalid-feedback">
+            Por favor, ingrese su correo electronico.
+          </div>
+        </div>
+       </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="streetcorner">Telefono de contacto<sup>*</sup></label>
+            <input type="number" class="form-control" id="telefonoContacto" placeholder="" value=""  required>
+            <div class="invalid-feedback">
+              Por favor, ingrese su telefono de contacto (8 o 9 digitos).         
+            </div>         
+          </div> 
+      <div class="col-md-4 mb-3">
+            <label for="imagenPerfil">Pega aqui la URL obtenida al subir tu imagen</label>
+            <input type="text" class="form-control" id="imagenPerfil" placeholder="" value="" >          
+          </div> 
+        </div>
+      </form>
+     
+      
+        <br><br>
+        <button class="btn btn-primary btn-lg" id="guardarPerfil" type="button">Guardar datos</button>
+        
+      
   </div>
+ 
+   <hr class="mb-4">
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <div class="alert fade alert-success" role="alert" id="alertResult">
-    <span id="resultSpan"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <!-- CREACION DE ALERTAS A MOSTRAR DEPENDIENDO DE LO QUE OCURRA -->
+  
+  <!-- ALERTA AL NO COMPLETAR CAMPOS OBLIGATORIOS -->
+  
+  <div class="alert alert-danger alert-dismissible fade show" id="alertCamposObli" style="display: none;" >
+    <span>
+      <p>Por favor, completa los campos requeridos y verifica que tu numero de contacto tenga entre 8 y 9 digitos.</p>
+    </span>
+    <button type="button" class="close" aria-label="Close" >
+      <span aria-hidden="true" id="close">&times;</span> 
+   </button>
+   </div>
+  <!-- ALERTA PARA CUANDO ACTUALIZAS LOS DATOS DEL PERFIL -->
+
+   <div class="alert alert-success alert-dismissible fade show" id="okAlertAct" style="display: none;" >
+    <span>
+      <p>Actualizaste tus datos con exito.</p>
+    </span>
+   <button type="button" class="close" aria-label="Close" >
+     <span aria-hidden="true" id="close">&times;</span> 
+  </button>
   </div>
+
+   <!-- ALERTA PARA CUANDO GUARDAS DATOS NUEVOS -->
+   
+
+   <div class="alert alert-success alert-dismissible fade show" id="okAlertGuardado" style="display: none;" >
+    <span>
+      <p>Datos guardados con exito.</p>
+    </span>
+   <button type="button" class="close" aria-label="Close" >
+     <span aria-hidden="true" id="close">&times;</span> 
+  </button>
+  </div>
+
+
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

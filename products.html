@@ -12,16 +12,41 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+
+ <style>
+
+.fa-bars{
+  
+  background-color: #fff;
+  
+}
+
+</style>
+ 
   </head>
   <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
+     <nav class="site-header navbar-expand-lg sticky-top py-1  bg-dark ">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+   
+    <i class="fas fa-bars"></i>
+  </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     
       
-      <div class="container d-flex flex-column flex-md-row justify-content-lg-around">
-        <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>        
-        <li class="nav-item dropdown">
+      <ul class="navbar-nav mr-auto container d-flex flex-column flex-md-row justify-content-lg-around">
+        <li class="nav-item "> 
+        <a class="nav-link " href="index.html">Inicio</a>
+       </li>
+       <li class="nav-item"> 
+        <a class="nav-link" href="categories.html">Categorías</a>
+      </li>
+      <li class="nav-item">  
+      <a class="nav-link" href="products.html">Productos</a>
+    </li>
+    <li class="nav-item"> 
+      <a class="nav-link" href="sell.html">Vender</a>        
+    </li>
+      <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle Usuario" href="#" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" id="btnUsuario"></a>
          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -29,7 +54,13 @@
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
           <a class="dropdown-item" href="login.html">Cerrar sesión</a>
         </div>
+      </li>
+      </ul>
       </div>
+    
+      </div>
+
+    </div>
     </nav>
     <div class="container p-5">
       <main role="main" class="pb-5">
@@ -84,7 +115,8 @@
         </div>
     </div>
     <div class="row">
-      <div class="list-group" id="prod-list-container">
+       <div class="list-group d-flex justify-content-between" id="prod-list-container">
+       
       </div>
     </div>
   </div>
