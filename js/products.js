@@ -49,7 +49,7 @@ function showProductsList(){
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-1 col-md-3">
                         <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
                     </div>
                     <div class="col">
