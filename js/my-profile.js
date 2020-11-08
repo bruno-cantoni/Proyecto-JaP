@@ -121,7 +121,10 @@ if (bandera == true){
    PerfilesStorage[indice].sApellido = Perfil.sApellido;
    PerfilesStorage[indice].ePerfil = Perfil.ePerfil;
    PerfilesStorage[indice].tContacto = Perfil.tContacto;
+   //Agregamos este control para cuando se actualice los datos el cliente, no guarde vacio en la imagen.
+   if (Perfil.imagen != ''){
    PerfilesStorage[indice].imagen = Perfil.imagen;
+  }
    $('#okAlertAct').slideDown()
       setTimeout(() => {  $('#okAlertAct').slideUp() }, 3000);
   }
